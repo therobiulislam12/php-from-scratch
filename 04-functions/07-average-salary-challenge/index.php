@@ -63,7 +63,11 @@ function calculateAverageSalary($jobListings = []) {
     $total += $jobPost['salary'];
   }
 
-  return "$" . number_format($total / $amount);
+  // return "$" . number_format($total / $amount);
+  // Calculate the average salary
+  $averageSalary = ($amount > 0) ? $total / $amount : 0;
+
+  return formatSalary($averageSalary);
 }
 
 // echo calculateAverageSalary($listings);
