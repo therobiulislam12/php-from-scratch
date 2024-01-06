@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Access Modifiers
+ * 1. public -> any one call
+ * 2. Private -> only inside class call
+ * 3. protected -> class and inheritance call
+ * 
+ */
 class User
 {
   // Properties
