@@ -68,6 +68,25 @@ function calculateAverageSalary($listings)
 
   return formatSalary($averageSalary);
 }
+//$filterJobListing = [];
+//if(isset($_GET['location'])){
+//    array_map(function ($job){
+//        if( strtolower($job['location']) == strtolower($_GET['location'])){
+//            $filterJobListing = $job;
+//        }
+//
+//    }, $listings);
+//}
+
+if(isset($_GET['location'])){
+    $location = $_GET['location'];
+
+    $filterListing = array_filter($listings, function($job) use ($location){
+        return strcasecmp($job['location'], $location) == 0;
+    });
+} else{
+    $filterListing = $listings;
+}
 ?>
 
 
@@ -92,7 +111,7 @@ function calculateAverageSalary($listings)
       <h2 class="text-2xl font-semibold mb-4">Average Salary: <?= calculateAverageSalary($listings)  ?></h2>
     </div>
     <!-- Output -->
-    <?php foreach ($listings as $index => $job) : ?>
+    <?php foreach ($filterListing as $index => $job) : ?>
       <div class="md my-4">
         <div class="rounded-lg shadow-md <?= $index % 2 === 0 ? 'bg-blue-100' : 'bg-white'; ?>">
           <div class="p-4">

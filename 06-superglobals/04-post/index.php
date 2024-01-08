@@ -1,3 +1,20 @@
+<?php 
+
+// Declare variable
+$title = "";
+$description = "";
+$submitted = false;
+
+
+if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['submit'])){
+  $title = htmlspecialchars($_POST['title']) ?? "";
+  $description = htmlspecialchars($_POST['description']) ?? "";
+
+  $submitted = true;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +29,7 @@
   <div class="flex justify-center items-center h-screen">
     <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
       <h1 class="text-2xl font-semibold mb-6">Create Job Listing</h1>
+      <!-- Form Start here -->
       <form method="post">
         <div class="mb-4">
           <label for="title" class="block text-gray-700 font-medium">Title</label>
@@ -30,6 +48,19 @@
       </form>
 
       <!-- Display submitted data -->
+      <?php if($submitted): ?>
+        <div class="mt-6 p-4 bg-gray-200 rounder">
+          <h2 class="text-lg">Submitted Data</h2>
+          <p>
+            <strong>Title:</strong>
+            <?= $title; ?>
+          </p>
+          <p>
+            <strong>Description:</strong>
+            <?= $description; ?>
+          </p>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
 </body>
